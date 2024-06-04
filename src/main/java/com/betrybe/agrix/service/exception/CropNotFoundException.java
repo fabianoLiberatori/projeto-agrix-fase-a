@@ -6,6 +6,6 @@ package com.betrybe.agrix.service.exception;
 public class CropNotFoundException extends NotFoundException {
 
   public CropNotFoundException() {
-    super("Crop not Found");
+    super("Plantação não encontrada!");
   }
 }
