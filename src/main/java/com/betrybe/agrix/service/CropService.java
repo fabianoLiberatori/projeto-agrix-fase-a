@@ -25,15 +25,16 @@ public class CropService {
   }
 
   public Crop findById(long id) throws CropNotFoundException {
-    return null;
+    return cropRepository.findById(id)
+        .orElseThrow(CropNotFoundException::new);
   }
 
   public List<Crop> findAll() {
-    return List.of();
+    return cropRepository.findAll();
   }
 
   public Crop create(Crop crop) {
-    return null;
+    return cropRepository.save(crop);
   }
 
   /**
@@ -46,4 +47,5 @@ public class CropService {
 
     return cropRepository.save(crop);
   }
+
 }

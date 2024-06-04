@@ -7,6 +7,7 @@ import com.betrybe.agrix.model.entity.Crop;
 import com.betrybe.agrix.model.entity.Farm;
 import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.FarmService;
+import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FarmNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,25 @@ public class FarmController {
       throws FarmNotFoundException {
     Crop savedCrop = cropService.createCrop(crop.toEntity(), farmId);
     return CropDto.fromEntity(savedCrop);
+  }
+
+  /**
+   * Get all Crops from farmId.
+   */
+  @GetMapping("/{farmId}/crops")
+  public List<CropDto> findAllCrops(@PathVariable("farmId") long farmId)
+      throws FarmNotFoundException, CropNotFoundException {
+    Farm farm = farmService.findById(farmId);
+
+    if (farm == null) {
+      throw new FarmNotFoundException();
+    }
+
+    List<Crop> crops = cropService.findAll();
+    return crops.stream()
+        .filter((crop -> crop.getFarm().getId() == farmId))
+        .map(CropDto::fromEntity)
+        .toList();
   }
 
 }
