@@ -7,20 +7,20 @@ import com.betrybe.agrix.model.entity.Crop;
  */
 public record CropDto(
     Long id,
-    Long farmId,
     String name,
-    Double plantedArea
+    Double plantedArea,
+    Long farmId
 ) {
 
   /**
    * Returns by Entity to DTO.
    */
-  public static CropDto fromEntity(Crop corp) {
+  public static CropDto fromEntity(Crop crop) {
     return new CropDto(
-        corp.getId(),
-        corp.getFarmId(),
-        corp.getName(),
-        corp.getPlantedArea()
+        crop.getId(),
+        crop.getName(),
+        crop.getPlantedArea(),
+        crop.getFarm().getId()
     );
   }
 
@@ -30,7 +30,7 @@ public record CropDto(
   public Crop toEntity() {
     Crop crop = new Crop();
     crop.setName(name);
-    crop.setPlanted_area(plantedArea);
+    crop.setPlantedArea(plantedArea);
     return crop;
   }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -17,9 +19,12 @@ public class Crop {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long farmId;
   private String name;
   private Double plantedArea;
+
+  @ManyToOne
+  @JoinColumn(name = "farm_id")
+  private Farm farm;
 
 
   public Crop() {
@@ -29,9 +34,6 @@ public class Crop {
     return id;
   }
 
-  public Long getFarmId() {
-    return farmId;
-  }
 
   public String getName() {
     return name;
@@ -45,7 +47,7 @@ public class Crop {
     this.id = id;
   }
 
-  public void setPlanted_area(Double plantedArea) {
+  public void setPlantedArea(Double plantedArea) {
     this.plantedArea = plantedArea;
   }
 
@@ -53,7 +55,12 @@ public class Crop {
     this.name = name;
   }
 
-  public void setFarm_id(Long farmId) {
-    this.farmId = farmId;
+
+  public Farm getFarm() {
+    return farm;
+  }
+
+  public void setFarm(Farm farm) {
+    this.farm = farm;
   }
 }
