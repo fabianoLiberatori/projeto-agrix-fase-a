@@ -73,7 +73,7 @@ public class FarmController {
    */
   @GetMapping("/{farmId}/crops")
   public List<CropDto> findAllCrops(@PathVariable("farmId") long farmId)
-      throws FarmNotFoundException, CropNotFoundException {
+      throws FarmNotFoundException {
     Farm farm = farmService.findById(farmId);
 
     if (farm == null) {
