@@ -36,6 +36,9 @@ public class CropService {
     return null;
   }
 
+  /**
+   * Create Crop with FarmId.
+   */
   public Crop createCrop(Crop crop, long farmId) throws FarmNotFoundException {
     Farm farm = farmService.findById(farmId);
 
