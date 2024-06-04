@@ -6,6 +6,6 @@ package com.betrybe.agrix.service.exception;
 public class FarmNotFoundException extends NotFoundException {
 
   public FarmNotFoundException() {
-    super("Farm not found");
+    super("Fazenda não encontrada!");
   }
 }
