@@ -1,22 +1,22 @@
-FROM eclipse-temurin:17-jdk-jammy as build-image
+FROM maven:3.8.5-openjdk-17 as build-image
 
 WORKDIR /to-build-app
 
 COPY . .
 
 # dependecy para deixar em cache as dependencias do mvn no docker
-RUN ./mvnw dependency:go-offline
+RUN mvn dependency:go-offline -B
 
-RUN ./mvnw install
+COPY . .
 
-RUN ./mvnw clean package
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /app
 
-COPY --from=build-image /to-build-app/target/*.jar /app/app.jar
+COPY --from=build-image /to-build-app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

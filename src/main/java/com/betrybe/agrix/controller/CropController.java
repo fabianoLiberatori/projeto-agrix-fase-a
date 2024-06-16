@@ -2,12 +2,9 @@ package com.betrybe.agrix.controller;
 
 
 import com.betrybe.agrix.controller.dto.CropDto;
-import com.betrybe.agrix.controller.dto.FarmDto;
 import com.betrybe.agrix.model.entity.Crop;
-import com.betrybe.agrix.model.entity.Farm;
 import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
-import com.betrybe.agrix.service.exception.FarmNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/crops")
-public class CorpController {
+public class CropController {
 
   private final CropService cropService;
 
   @Autowired
-  public CorpController(CropService cropService) {
+  public CropController(CropService cropService) {
     this.cropService = cropService;
   }
 
